@@ -11,8 +11,19 @@
 <body>
     <div id="container">
         <div id="search-container">
+            <label><h1>Which pair would you like to search for?:</h1></label>
             <input type="text" id="search-pair">
-            <button id="search-pair-button">Enter</button>
+            <input type="date" id="startDate">
+            <input type="date" id="endDate">
+            <label>Time Interval</label>
+            <select id="timeinterval">
+                <option value="30min">30 min</option>
+                <option value="4hours">4 hours</option>
+                <option value="1day">1 Day</option>
+                <option value="1week">1 Week</option>
+            </select>
+        </div>
+            <button id="search-button">Enter</button>
                 
         </div>
         <div id="result"></div>
@@ -20,7 +31,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js" integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

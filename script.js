@@ -15,17 +15,19 @@ window.addEventListener("DOMContentLoaded", async function () {
         let formattedEndDate = END_DATE.replace(/-/g, '/'); // Replace '-' with '/' to get yyyy/mm/dd
 
         // Make the API request using Axios
-        let response = await axios.get(`${BASE_API_URL}/time_series?apikey=${API_KEY}&interval=${INTERVAL}&symbol=${SYMBOL}&start_date=${formattedStartDate}&end_date=${formattedEndDate}&format=${FORMAT}`)
+        let response = await axios.get(`${BASE_API_URL}/time_series?apikey=${API_KEY}&interval=${INTERVAL}&start_date=${formattedStartDate}&end_date=${formattedEndDate}&format=${FORMAT}&symbol=${SYMBOL}`)
         let eurUsd = response.data.values;
         
 
         function renderTasks() {
 
-            let resultHTML = '<h2>EUR/USD Exchange Data</h2><ul>';
+            let resultHTML = '<h2>Historical Prices</h2><ul>';
             // Use 'for...of' loop to go through the data
             for (let i = 0; i < eurUsd.length; i++) {
                 let { datetime, open, high, low, close } = eurUsd[i];
+                
                 resultHTML += `<li>DateTime: ${datetime} | Open: ${open} | High: ${high} | Low: ${low} | Close: ${close}</li>`;
+            console.log(eurUsd);
             }
 
             resultHTML += '</ul>';

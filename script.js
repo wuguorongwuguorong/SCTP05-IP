@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", async function () {
     let BASE_API_URL = 'https://api.twelvedata.com';
     let API_KEY = 'da7cc643495745a78c99c491e1d4d0a6';
-
     let FORMAT = 'JSON';
 
     document.querySelector("#search-button").addEventListener("click", async function () {
@@ -16,28 +15,33 @@ window.addEventListener("DOMContentLoaded", async function () {
 
         // Make the API request using Axios
         let response = await axios.get(`${BASE_API_URL}/time_series?apikey=${API_KEY}&interval=${INTERVAL}&start_date=${formattedStartDate}&end_date=${formattedEndDate}&format=${FORMAT}&symbol=${SYMBOL}`)
-        let eurUsd = response.data.values;
+        let allCurrencyUsd = response.data.values;
         
 
-        function renderTasks() {
+         // Function to render the data in the table
+         function renderTasks() {
+            let tbody = document.querySelector("#priceTable tbody");
+            tbody.innerHTML = ""; // Clear any previous rows
+            
+            for (let i = 0; i < allCurrencyUsd.length; i++) {
+                let { datetime, open, high, low, close } = allCurrencyUsd[i];
 
-            let resultHTML = '<h2>Historical Prices</h2><ul>';
-            // Use 'for...of' loop to go through the data
-            for (let i = 0; i < eurUsd.length; i++) {
-                let { datetime, open, high, low, close } = eurUsd[i];
-                
-                resultHTML += `<li>DateTime: ${datetime} | Open: ${open} | High: ${high} | Low: ${low} | Close: ${close}</li>`;
-            console.log(eurUsd);
+                // Create a new row
+                let row = `<tr>
+                            <td>${datetime}</td>
+                            <td>${open}</td>
+                            <td>${high}</td>
+                            <td>${low}</td>
+                            <td>${close}</td>
+                           </tr>`;
+
+                // Append the row to the table body
+                tbody.innerHTML += row;
             }
-
-            resultHTML += '</ul>';
-
-            // Display the generated result in the #result div
-            document.querySelector("#result").innerHTML = resultHTML;
         }
-
         // Call the function to render the data
         renderTasks();
+
 
     });
 

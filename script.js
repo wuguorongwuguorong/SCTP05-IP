@@ -16,13 +16,13 @@ window.addEventListener("DOMContentLoaded", async function () {
         // Make the API request using Axios
         let response = await axios.get(`${BASE_API_URL}/time_series?apikey=${API_KEY}&interval=${INTERVAL}&start_date=${formattedStartDate}&end_date=${formattedEndDate}&format=${FORMAT}&symbol=${SYMBOL}`)
         let allCurrencyUsd = response.data.values;
-        
 
-         // Function to render the data in the table
-         function renderTasks() {
+
+        // Function to render the data in the table
+        function renderTasks() {
             let tbody = document.querySelector("#priceTable tbody");
             tbody.innerHTML = ""; // Clear any previous rows
-            
+
             for (let i = 0; i < allCurrencyUsd.length; i++) {
                 let { datetime, open, high, low, close } = allCurrencyUsd[i];
 
@@ -41,9 +41,27 @@ window.addEventListener("DOMContentLoaded", async function () {
         }
         // Call the function to render the data
         renderTasks();
-
-
     });
+    
+        
+
+        async function weatherTask(){
+        let weather_Url = "http://api.weatherapi.com/v1/current.json?key=d0145b08e27343808f8151015242710&q=Singapore&aqi=no";
+        let response = await axios.get(weather_Url);
+        console.log(response.data)
+
+       let city = response.data.location.country;
+        console.log(city);
+
+        document.querySelector('.city').innerHTML =response.data.location.country;
+        document.querySelector('.Temp').innerHTML = response.data.current.temp_c + "°C";
+        document.querySelector('.weather img').src = "https:" + response.data.current.condition.icon;
+
+
+
+    
+        }
+        weatherTask();
 
 });
 

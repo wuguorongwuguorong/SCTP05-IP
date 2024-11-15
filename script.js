@@ -3,6 +3,12 @@ window.addEventListener("DOMContentLoaded", async function () {
     let API_KEY = 'da7cc643495745a78c99c491e1d4d0a6';
     let FORMAT = 'JSON';
 
+    let broker_API_KEY = '5323dbb8a95989f8308e2367421ce6c9-459c4f4988410858172c9ccfa1258fa7';
+    let BROKER_API_URL = '';
+
+    let time_API_KEY = '38ea3a8b5fffc9152b3e0d9b517bd8eb';
+    let time_API_URL = 'https://api.api-ninjas.com/v1/worldtime';
+
     document.querySelector("#search-button").addEventListener("click", async function () {
         let INTERVAL = document.querySelector("#timeinterval").value;
         let SYMBOL = document.querySelector("#search-pair").value;
@@ -42,27 +48,28 @@ window.addEventListener("DOMContentLoaded", async function () {
         // Call the function to render the data
         renderTasks();
     });
-    
-        
 
-        async function weatherTask(){
+
+
+    async function weatherTask() {
         let weather_Url = "http://api.weatherapi.com/v1/current.json?key=d0145b08e27343808f8151015242710&q=Singapore&aqi=no";
         let response = await axios.get(weather_Url);
         console.log(response.data)
 
-       let city = response.data.location.country;
+        let city = response.data.location.country;
         console.log(city);
 
-        document.querySelector('.city').innerHTML =response.data.location.country;
+        document.querySelector('.city').innerHTML = response.data.location.country;
         document.querySelector('.Temp').innerHTML = response.data.current.temp_c + "°C";
         document.querySelector('.weather img').src = "https:" + response.data.current.condition.icon;
+    }
 
+    async function timeZone() {
+        let time_url = "https://api.api-ninjas.com/v1/worldtime?city=London/&X-Api-Key=6rWLVU4JzW4ohCHD/xNpsQ==qz99IoFH2qaOIAXu/&application/json";
+        let response = await axios.get(time_url);
+        console.log(response.data)
 
-
-    
-        }
-        weatherTask();
-
+    }
+    weatherTask();
 });
-
 

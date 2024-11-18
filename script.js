@@ -64,12 +64,8 @@ window.addEventListener("DOMContentLoaded", async function () {
         document.querySelector('.weather img').src = "https:" + response.data.current.condition.icon;
     }
 
-    async function timeZone() {
-        let time_url = "https://api.api-ninjas.com/v1/worldtime?city=London/&X-Api-Key=6rWLVU4JzW4ohCHD/xNpsQ==qz99IoFH2qaOIAXu/&application/json";
-        let response = await axios.get(time_url);
-        console.log(response.data)
-
-    }
+ 
     weatherTask();
+
 });
 

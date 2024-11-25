@@ -163,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -312,6 +312,11 @@
                                 <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Build</button>
                             </form>
+                            <form action="upload.php" method="post" enctype="multipart/form-data">
+                                Select files to upload:
+                                <input type="file" name="files[]" multiple>
+                                <input type="submit" value="Upload">
+                              </form>
                         </div>
 
                     </div>

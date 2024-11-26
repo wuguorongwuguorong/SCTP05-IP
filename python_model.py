@@ -188,7 +188,7 @@ fig.update_xaxes(showgrid=False)
 fig.update_yaxes(showgrid=False)
 # fig.show()
 
-
+### Add figure to html chart ###
 figure_data = fig.to_json()
 html_file_path = 'index.html'
 with open(html_file_path, 'r', encoding='utf-8') as file:
@@ -207,11 +207,11 @@ if content.find('plotly-data') != -1:
         print (new_div)
         div_to_replace.replace_with(new_div)
     # Write back to the same HTML file
-    with open(html_file_path, 'w', encoding='utf-8') as file:
-        file.write(soup.prettify())
+    with open(html_file_path, 'w', encoding='utf-8') as writefile:
+        writefile.write(soup.prettify())
     
-# content_with_figure = content.replace('{{ fig }}', f'<script id="plotly-data" type="application/json">{figure_data}</script>')
+content_with_figure = content.replace('{{ fig }}', f'<script id="plotly-data" type="application/json">{figure_data}</script>')
 # # # Write back to the same HTML file
-# with open(html_file_path, 'w', encoding='utf-8') as file:
-#     file.write(content_with_figure)
-# print("Figure has been successfully appended to index.html")
+with open(html_file_path, 'w', encoding='utf-8') as file:
+    file.write(content_with_figure)
+print("Figure has been successfully appended to index.html")

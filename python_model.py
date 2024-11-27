@@ -181,7 +181,7 @@ names = cycle(['Last 15 days close price','Predicted next 10 days close price'])
 fig = px.line(new_pred_plot,x=new_pred_plot.index, y=[new_pred_plot['last_original_days_value'],
                                                       new_pred_plot['next_predicted_days_value']],
               labels={'value': 'Close price','index': 'Timestamp'})
-fig.update_layout(title_text='Compare last 15 days vs next 10 days',
+fig.update_layout(title_text='Compare last 15 bars vs next 10 bars',
                   plot_bgcolor='white', font_size=15, font_color='black',legend_title_text='Close Price')
 fig.for_each_trace(lambda t:  t.update(name = next(names)))
 fig.update_xaxes(showgrid=False)

@@ -18,11 +18,16 @@ import matplotlib.pyplot as plt
 from colorama import Fore
 from xgboost import XGBRegressor
 
+# This import is to display plotly on html page #
+from jinja2 import Template
+from bs4 import BeautifulSoup
+# This import is to display plotly on html page #
+
 response = requests.get("https://api.twelvedata.com/time_series?apikey=da7cc643495745a78c99c491e1d4d0a6&interval=4h&symbol=GBP/USD&start_date=2020-01-01 16:23:00&end_date=2024-11-13 16:00:00&format=JSON&timezone=utc")
 
 # You can create a dataframe with json file of url import
 df = pd.DataFrame(response.json()["values"])
-df
+# df
 # Convert specified columns to float
 df['open'] = df['open'].astype(float)
 df['high'] = df['high'].astype(float)
@@ -181,4 +186,32 @@ fig.update_layout(title_text='Compare last 15 days vs next 10 days',
 fig.for_each_trace(lambda t:  t.update(name = next(names)))
 fig.update_xaxes(showgrid=False)
 fig.update_yaxes(showgrid=False)
-fig.show()
+# fig.show()
+
+### Add figure to html chart ###
+figure_data = fig.to_json()
+html_file_path = 'index.html'
+with open(html_file_path, 'r', encoding='utf-8') as file:
+    content = file.read()
+    
+# if the html was already updated with a chart, plotly-data would be found
+# this will remove the plotly-data div
+if content.find('plotly-data') != -1:
+    print ("reset previous chart")
+    soup = BeautifulSoup(content, 'html.parser')
+    div_to_replace = soup.find('div', id='plotly-figure')
+    
+    if div_to_replace:
+        new_div = soup.new_tag('div', id='plotly-figure')
+        new_div.string = '{{ fig }}'
+        print (new_div)
+        div_to_replace.replace_with(new_div)
+    # Write back to the same HTML file
+    with open(html_file_path, 'w', encoding='utf-8') as writefile:
+        writefile.write(soup.prettify())
+    
+content_with_figure = content.replace('{{ fig }}', f'<script id="plotly-data" type="application/json">{figure_data}</script>')
+# # # Write back to the same HTML file
+with open(html_file_path, 'w', encoding='utf-8') as file:
+    file.write(content_with_figure)
+print("Figure has been successfully appended to index.html")

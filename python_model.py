@@ -23,7 +23,7 @@ from jinja2 import Template
 from bs4 import BeautifulSoup
 # This import is to display plotly on html page #
 
-response = requests.get("https://api.twelvedata.com/time_series?apikey=da7cc643495745a78c99c491e1d4d0a6&interval=4h&symbol=GBP/USD&start_date=2020-01-01 16:23:00&end_date=2024-11-13 16:00:00&format=JSON&timezone=utc")
+response = requests.get("https://api.twelvedata.com/time_series?apikey=da7cc643495745a78c99c491e1d4d0a6&interval=4h&symbol=GBP/USD&start_date=2020-01-01 16:23:00&end_date=2024-11-26 16:00:00&format=JSON&timezone=utc")
 
 # You can create a dataframe with json file of url import
 df = pd.DataFrame(response.json()["values"])
@@ -53,7 +53,7 @@ cov_returns = numeric_df.cov()
 print(df_mean, cov_returns, sep='\n')
 closedf = df[['datetime','close']]
 print("Shape of close dataframe:", closedf.shape)
-closedf = closedf[(closedf['datetime'] >= '2024-01-01') & (closedf['datetime'] <= '2024-07-13')]
+closedf = closedf[(closedf['datetime'] >= '2024-01-01') & (closedf['datetime'] <= '2024-07-26')]
 
 
 close_stock = closedf.copy()

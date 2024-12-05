@@ -53,7 +53,8 @@ cov_returns = numeric_df.cov()
 print(df_mean, cov_returns, sep='\n')
 closedf = df[['datetime','close']]
 print("Shape of close dataframe:", closedf.shape)
-closedf = closedf[(closedf['datetime'] >= '2024-03-01') & (closedf['datetime'] <= '2024-12-02')]
+#The date are taken from the input of the User
+closedf = closedf[(closedf['datetime'] >= '2023-03-01') & (closedf['datetime'] <= '2023-12-02')]
 
 
 close_stock = closedf.copy()

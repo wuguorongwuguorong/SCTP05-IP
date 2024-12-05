@@ -302,7 +302,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <!-- Rows will be inserted dynamically here by JavaScript -->
+                                    <!-- Rows will be inserted dynamically here by JavaScript -->
                                 </tbody>
                             </table>
                         </div>
@@ -313,15 +313,35 @@
                             <h2>Prediction Model</h2>
                         </div>
                         <div class=form>
-                            <div class="col-lg-7 col-sm-4 mt-2">
+                            <div class="col-12">
                                 <form class="d-flex" role="search">
-                                    <input class="form-control me-1" type="search" placeholder="Search"
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="search" class="text-white">Enter ticker</label>
+                                            <input type="searchBar" id="searchBar" class="form-control"
+                                                placeholder="(EUR/USD)">
+                                        </div>
+                                        <div class="col">
+                                            <label for="startDate" class="text-white">Start Date</label>
+                                            <input type="date" id="startDate" class="form-control">
+                                        </div>
+                                        <div class="col">
+                                            <label for="endDate" class="text-white">End Date</label>
+                                            <input type="text" class="form-control" placeholder="Last name"
+                                                aria-label="Last name">
+                                        </div>
+                                        <div class="col">
+                                            
+                                            <button class="btn btn-outline-success" type="submit">Build</button>
+                                        </div>
+                                    </div>
+                                    <!--<input class="form-control" type="search" placeholder="Search"
                                         aria-label="Search">
                                     <label for="startDate" class="text-white">Start Date</label>
                                     <input type="date" id="startDate" class="form-control">
                                     <label for="endDate" class="text-white">End Date</label>
                                     <input type="date" id="startDate" class="form-control">
-                                    <button class="btn btn-outline-success" type="submit">Build</button>
+                                    <button class="btn btn-outline-success" type="submit">Build</button>-->
                                 </form>
                             </div>
                         </div>

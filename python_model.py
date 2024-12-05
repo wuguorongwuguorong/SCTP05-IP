@@ -53,7 +53,7 @@ cov_returns = numeric_df.cov()
 print(df_mean, cov_returns, sep='\n')
 closedf = df[['datetime','close']]
 print("Shape of close dataframe:", closedf.shape)
-closedf = closedf[(closedf['datetime'] >= '2024-01-01') & (closedf['datetime'] <= '2024-07-26')]
+closedf = closedf[(closedf['datetime'] >= '2024-03-01') & (closedf['datetime'] <= '2024-12-02')]
 
 
 close_stock = closedf.copy()
@@ -66,12 +66,12 @@ test_size=len(closedf)-training_size
 train_data,test_data=closedf[0:training_size,:],closedf[training_size:len(closedf),:1]
 
 # convert an array of values into a dataset matrix
-def create_dataset(dataset, time_step=3):
+def create_dataset(closedf, time_step=3):
     dataX, dataY = [], []
-    for i in range(len(dataset)-time_step-1):
-        a = dataset[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
+    for i in range(len(closedf)-time_step-1):
+        a = closedf[i:(i+time_step), 0]   ###i=0, 0,1,2,3-----99   100 
         dataX.append(a)
-        dataY.append(dataset[i + time_step, 0])
+        dataY.append(closedf[i + time_step, 0])
     return np.array(dataX), np.array(dataY)
 time_step = 15
 X_train, y_train = create_dataset(train_data, time_step)
@@ -186,7 +186,7 @@ fig.update_layout(title_text='Compare last 15 bars vs next 10 bars',
 fig.for_each_trace(lambda t:  t.update(name = next(names)))
 fig.update_xaxes(showgrid=False)
 fig.update_yaxes(showgrid=False)
-# fig.show()
+fig.show()
 
 ### Add figure to html chart ###
 figure_data = fig.to_json()

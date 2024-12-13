@@ -22,7 +22,7 @@ response = requests.get("https://api.twelvedata.com/time_series?apikey=da7cc6434
 
 # You can create a dataframe with json file of url import
 df = pd.DataFrame(response.json()["values"])
-df
+
 # Convert specified columns to float
 df['open'] = df['open'].astype(float)
 df['high'] = df['high'].astype(float)
